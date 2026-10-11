@@ -1,0 +1,67 @@
+rea-workbench demo
+========================================================
+Use case: reverse-engineer a black-box business rule
+from input/output traces → propose rebuild → gate → HTML report
+
+[fee_schedule] recovering from traces …
+PASS  Tiered fee schedule
+  Recovered 3 tiers + under-$50 surcharge=1.0 from 24 traces (residual err=0.0000)
+  evals 24/24 · claims 2
+    PASS  fee_00
+    PASS  fee_01
+    PASS  fee_02
+    PASS  fee_03
+    PASS  fee_04
+    PASS  fee_05
+    PASS  fee_06
+    PASS  fee_07
+    PASS  fee_08
+    PASS  fee_09
+    PASS  fee_10
+    PASS  fee_11
+    PASS  fee_12
+    PASS  fee_13
+    PASS  fee_14
+    PASS  fee_15
+    PASS  fee_16
+    PASS  fee_17
+    PASS  fee_18
+    PASS  fee_19
+    PASS  fee_20
+    PASS  fee_21
+    PASS  fee_22
+    PASS  fee_23
+
+[percent_rule] recovering from traces …
+PASS  Operator-dependent percent value
+  Fitted +/− and ×÷ formulas over 12 traces (add_sub_ok=True, mul_div_ok=True)
+  evals 12/12 · claims 2
+    PASS  pct_00
+    PASS  pct_01
+    PASS  pct_02
+    PASS  pct_03
+    PASS  pct_04
+    PASS  pct_05
+    PASS  pct_06
+    PASS  pct_07
+    PASS  pct_08
+    PASS  pct_09
+    PASS  pct_10
+    PASS  pct_11
+
+[speed_ramp] recovering from traces …
+PASS  Clamped linear speed ramp
+  Recovered SPEED=6.0, ACCEL=0.001, MAX=13.0 from 8 traces (residual err=0.0000)
+  evals 8/8 · claims 1
+    PASS  spd_00
+    PASS  spd_01
+    PASS  spd_02
+    PASS  spd_03
+    PASS  spd_04
+    PASS  spd_05
+    PASS  spd_06
+    PASS  spd_07
+
+========================================================
+RESULT: PASS — HTML report → /workspace/rea-workbench/docs/demo-report.html
+========================================================

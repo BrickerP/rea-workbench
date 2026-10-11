@@ -1,0 +1,24 @@
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "rea-workbench"
+version = "1.0.0"
+description = "Recover a black-box business rule from I/O traces, rebuild, gate, and HTML report."
+readme = "README.md"
+requires-python = ">=3.10"
+license = { text = "MIT" }
+authors = [{ name = "Yupeng Lu" }]
+keywords = ["reverse-engineering", "rebuild", "evals", "evidence", "guardrails"]
+dependencies = []
+
+[project.urls]
+Homepage = "https://github.com/BrickerP/rea-workbench"
+Hire = "https://brickerp.github.io/hire/"
+
+[project.scripts]
+rea-workbench = "rea_workbench.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]

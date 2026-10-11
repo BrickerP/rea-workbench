@@ -1,0 +1,6 @@
+{
+  "case": "fee_schedule",
+  "n_traces": 24,
+  "digest": "sha256:af45cea32d28e8b79bc8b2cd81ee8e20bdbf4503c571b1e18a64e59d07f7d049",
+  "note": "I/O traces only \u2014 black-box source not included"
+}

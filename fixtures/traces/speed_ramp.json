@@ -1,0 +1,58 @@
+[
+  {
+    "id": "spd_00",
+    "input": {
+      "ticks": 0
+    },
+    "output": 6.0
+  },
+  {
+    "id": "spd_01",
+    "input": {
+      "ticks": 500
+    },
+    "output": 6.5
+  },
+  {
+    "id": "spd_02",
+    "input": {
+      "ticks": 1000
+    },
+    "output": 7.0
+  },
+  {
+    "id": "spd_03",
+    "input": {
+      "ticks": 2000
+    },
+    "output": 8.0
+  },
+  {
+    "id": "spd_04",
+    "input": {
+      "ticks": 4000
+    },
+    "output": 10.0
+  },
+  {
+    "id": "spd_05",
+    "input": {
+      "ticks": 7000
+    },
+    "output": 13.0
+  },
+  {
+    "id": "spd_06",
+    "input": {
+      "ticks": 10000
+    },
+    "output": 13.0
+  },
+  {
+    "id": "spd_07",
+    "input": {
+      "ticks": 15000
+    },
+    "output": 13.0
+  }
+]

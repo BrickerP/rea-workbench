@@ -1,0 +1,541 @@
+{
+  "ok": true,
+  "cases": [
+    {
+      "case": "fee_schedule",
+      "title": "Tiered fee schedule",
+      "summary": "Recovered 3 tiers + under-$50 surcharge=1.0 from 24 traces (residual err=0.0000)",
+      "ok": true,
+      "claims": [
+        {
+          "id": "tier-rates",
+          "statement": "Per-tier fee = max(floor, amount * rate); gold: rate=0.015, floor=2.0, silver: rate=0.022, floor=3.5, standard: rate=0.029, floor=5.0",
+          "confidence": 0.99,
+          "authority": "inferred",
+          "limitations": [
+            "Fitted from traces only; tier set limited to observed labels"
+          ],
+          "covers_eval": [
+            "fee_02",
+            "fee_03",
+            "fee_04",
+            "fee_07",
+            "fee_09",
+            "fee_10",
+            "fee_11",
+            "fee_12",
+            "fee_13",
+            "fee_14",
+            "fee_15",
+            "fee_16",
+            "fee_17",
+            "fee_18",
+            "fee_19",
+            "fee_20",
+            "fee_21",
+            "fee_22",
+            "fee_23"
+          ]
+        },
+        {
+          "id": "under-50-surcharge",
+          "statement": "When amount < 50, add flat surcharge 1.0",
+          "confidence": 0.99,
+          "authority": "inferred",
+          "limitations": [
+            "Threshold 50 inferred from residual pattern on small amounts"
+          ],
+          "covers_eval": [
+            "fee_00",
+            "fee_01",
+            "fee_05",
+            "fee_06",
+            "fee_08"
+          ]
+        }
+      ],
+      "eval_rows": [
+        {
+          "id": "fee_00",
+          "ok": true,
+          "expect": 6.0,
+          "got": 6.0,
+          "error": null,
+          "description": "standard $25.0 \u2192 6.0"
+        },
+        {
+          "id": "fee_01",
+          "ok": true,
+          "expect": 4.5,
+          "got": 4.5,
+          "error": null,
+          "description": "silver $10.0 \u2192 4.5"
+        },
+        {
+          "id": "fee_02",
+          "ok": true,
+          "expect": 2.0,
+          "got": 2.0,
+          "error": null,
+          "description": "gold $75.0 \u2192 2.0"
+        },
+        {
+          "id": "fee_03",
+          "ok": true,
+          "expect": 5.0,
+          "got": 5.0,
+          "error": null,
+          "description": "standard $50.0 \u2192 5.0"
+        },
+        {
+          "id": "fee_04",
+          "ok": true,
+          "expect": 3.5,
+          "got": 3.5,
+          "error": null,
+          "description": "silver $50.0 \u2192 3.5"
+        },
+        {
+          "id": "fee_05",
+          "ok": true,
+          "expect": 3.0,
+          "got": 3.0,
+          "error": null,
+          "description": "gold $49.99 \u2192 3.0"
+        },
+        {
+          "id": "fee_06",
+          "ok": true,
+          "expect": 6.0,
+          "got": 6.0,
+          "error": null,
+          "description": "standard $25.0 \u2192 6.0"
+        },
+        {
+          "id": "fee_07",
+          "ok": true,
+          "expect": 22.0,
+          "got": 22.0,
+          "error": null,
+          "description": "silver $1000.0 \u2192 22.0"
+        },
+        {
+          "id": "fee_08",
+          "ok": true,
+          "expect": 3.0,
+          "got": 3.0,
+          "error": null,
+          "description": "gold $25.0 \u2192 3.0"
+        },
+        {
+          "id": "fee_09",
+          "ok": true,
+          "expect": 72.5,
+          "got": 72.5,
+          "error": null,
+          "description": "standard $2500.0 \u2192 72.5"
+        },
+        {
+          "id": "fee_10",
+          "ok": true,
+          "expect": 27.91,
+          "got": 27.91,
+          "error": null,
+          "description": "silver $1268.66 \u2192 27.91"
+        },
+        {
+          "id": "fee_11",
+          "ok": true,
+          "expect": 2.0,
+          "got": 2.0,
+          "error": null,
+          "description": "gold $94.24 \u2192 2.0"
+        },
+        {
+          "id": "fee_12",
+          "ok": true,
+          "expect": 9.9,
+          "got": 9.9,
+          "error": null,
+          "description": "gold $659.82 \u2192 9.9"
+        },
+        {
+          "id": "fee_13",
+          "ok": true,
+          "expect": 27.12,
+          "got": 27.12,
+          "error": null,
+          "description": "gold $1808.05 \u2192 27.12"
+        },
+        {
+          "id": "fee_14",
+          "ok": true,
+          "expect": 9.01,
+          "got": 9.01,
+          "error": null,
+          "description": "gold $600.52 \u2192 9.01"
+        },
+        {
+          "id": "fee_15",
+          "ok": true,
+          "expect": 46.32,
+          "got": 46.32,
+          "error": null,
+          "description": "silver $2105.47 \u2192 46.32"
+        },
+        {
+          "id": "fee_16",
+          "ok": true,
+          "expect": 9.98,
+          "got": 9.98,
+          "error": null,
+          "description": "gold $665.22 \u2192 9.98"
+        },
+        {
+          "id": "fee_17",
+          "ok": true,
+          "expect": 24.31,
+          "got": 24.31,
+          "error": null,
+          "description": "standard $838.18 \u2192 24.31"
+        },
+        {
+          "id": "fee_18",
+          "ok": true,
+          "expect": 66.05,
+          "got": 66.05,
+          "error": null,
+          "description": "standard $2277.63 \u2192 66.05"
+        },
+        {
+          "id": "fee_19",
+          "ok": true,
+          "expect": 46.11,
+          "got": 46.11,
+          "error": null,
+          "description": "silver $2095.93 \u2192 46.11"
+        },
+        {
+          "id": "fee_20",
+          "ok": true,
+          "expect": 24.28,
+          "got": 24.28,
+          "error": null,
+          "description": "standard $837.22 \u2192 24.28"
+        },
+        {
+          "id": "fee_21",
+          "ok": true,
+          "expect": 63.18,
+          "got": 63.18,
+          "error": null,
+          "description": "silver $2871.85 \u2192 63.18"
+        },
+        {
+          "id": "fee_22",
+          "ok": true,
+          "expect": 6.84,
+          "got": 6.84,
+          "error": null,
+          "description": "silver $311.12 \u2192 6.84"
+        },
+        {
+          "id": "fee_23",
+          "ok": true,
+          "expect": 6.48,
+          "got": 6.48,
+          "error": null,
+          "description": "silver $294.67 \u2192 6.48"
+        }
+      ],
+      "errors": [],
+      "paths": {
+        "rebuild": "/Users/yupeng/Projects/rea-workbench/reports/artifacts/fee_schedule/rebuild.py",
+        "evidence": "/Users/yupeng/Projects/rea-workbench/reports/artifacts/fee_schedule/evidence.json",
+        "evals": "/Users/yupeng/Projects/rea-workbench/reports/artifacts/fee_schedule/evals.json",
+        "summary": "/Users/yupeng/Projects/rea-workbench/reports/artifacts/fee_schedule/recovery.json"
+      },
+      "traces_path": "/Users/yupeng/Projects/rea-workbench/fixtures/traces/fee_schedule.json",
+      "n_traces": 24,
+      "params": {
+        "tiers": {
+          "standard": {
+            "rate": 0.029,
+            "floor": 5.0
+          },
+          "silver": {
+            "rate": 0.022,
+            "floor": 3.5
+          },
+          "gold": {
+            "rate": 0.015,
+            "floor": 2.0
+          }
+        },
+        "surcharge": 1.0,
+        "residual": 0.0
+      }
+    },
+    {
+      "case": "percent_rule",
+      "title": "Operator-dependent percent value",
+      "summary": "Fitted +/\u2212 and \u00d7\u00f7 formulas over 12 traces (add_sub_ok=True, mul_div_ok=True)",
+      "ok": true,
+      "claims": [
+        {
+          "id": "add-sub-percent",
+          "statement": "After + or -, percent value = current * previous / 100",
+          "confidence": 0.95,
+          "authority": "inferred",
+          "limitations": [
+            "Operator set limited to traces"
+          ],
+          "covers_eval": [
+            "pct_00",
+            "pct_01",
+            "pct_02",
+            "pct_03",
+            "pct_08",
+            "pct_09"
+          ]
+        },
+        {
+          "id": "mul-div-percent",
+          "statement": "After * or /, percent value = current / 100",
+          "confidence": 0.93,
+          "authority": "inferred",
+          "limitations": [
+            "Independent of previous for * and /"
+          ],
+          "covers_eval": [
+            "pct_04",
+            "pct_05",
+            "pct_06",
+            "pct_07",
+            "pct_10",
+            "pct_11"
+          ]
+        }
+      ],
+      "eval_rows": [
+        {
+          "id": "pct_00",
+          "ok": true,
+          "expect": 20.0,
+          "got": 20.0,
+          "error": null,
+          "description": "200.0 + 10.0% \u2192 20.0"
+        },
+        {
+          "id": "pct_01",
+          "ok": true,
+          "expect": 5.0,
+          "got": 5.0,
+          "error": null,
+          "description": "50.0 - 10.0% \u2192 5.0"
+        },
+        {
+          "id": "pct_02",
+          "ok": true,
+          "expect": 0.0,
+          "got": 0.0,
+          "error": null,
+          "description": "0.0 + 10.0% \u2192 0.0"
+        },
+        {
+          "id": "pct_03",
+          "ok": true,
+          "expect": 0.0,
+          "got": 0.0,
+          "error": null,
+          "description": "100.0 + 0.0% \u2192 0.0"
+        },
+        {
+          "id": "pct_04",
+          "ok": true,
+          "expect": 0.1,
+          "got": 0.1,
+          "error": null,
+          "description": "200.0 * 10.0% \u2192 0.1"
+        },
+        {
+          "id": "pct_05",
+          "ok": true,
+          "expect": 0.1,
+          "got": 0.1,
+          "error": null,
+          "description": "200.0 / 10.0% \u2192 0.1"
+        },
+        {
+          "id": "pct_06",
+          "ok": true,
+          "expect": 0.25,
+          "got": 0.25,
+          "error": null,
+          "description": "50.0 * 25.0% \u2192 0.25"
+        },
+        {
+          "id": "pct_07",
+          "ok": true,
+          "expect": 0.5,
+          "got": 0.5,
+          "error": null,
+          "description": "100.0 / 50.0% \u2192 0.5"
+        },
+        {
+          "id": "pct_08",
+          "ok": true,
+          "expect": 4.0,
+          "got": 4.0,
+          "error": null,
+          "description": "80.0 + 5.0% \u2192 4.0"
+        },
+        {
+          "id": "pct_09",
+          "ok": true,
+          "expect": 24.0,
+          "got": 24.0,
+          "error": null,
+          "description": "120.0 - 20.0% \u2192 24.0"
+        },
+        {
+          "id": "pct_10",
+          "ok": true,
+          "expect": 0.1,
+          "got": 0.1,
+          "error": null,
+          "description": "10.0 * 10.0% \u2192 0.1"
+        },
+        {
+          "id": "pct_11",
+          "ok": true,
+          "expect": 0.2,
+          "got": 0.2,
+          "error": null,
+          "description": "40.0 / 20.0% \u2192 0.2"
+        }
+      ],
+      "errors": [],
+      "paths": {
+        "rebuild": "/Users/yupeng/Projects/rea-workbench/reports/artifacts/percent_rule/rebuild.py",
+        "evidence": "/Users/yupeng/Projects/rea-workbench/reports/artifacts/percent_rule/evidence.json",
+        "evals": "/Users/yupeng/Projects/rea-workbench/reports/artifacts/percent_rule/evals.json",
+        "summary": "/Users/yupeng/Projects/rea-workbench/reports/artifacts/percent_rule/recovery.json"
+      },
+      "traces_path": "/Users/yupeng/Projects/rea-workbench/fixtures/traces/percent_rule.json",
+      "n_traces": 12,
+      "params": {
+        "add_sub_ok": true,
+        "mul_div_ok": true
+      }
+    },
+    {
+      "case": "speed_ramp",
+      "title": "Clamped linear speed ramp",
+      "summary": "Recovered SPEED=6.0, ACCEL=0.001, MAX=13.0 from 8 traces (residual err=0.0000)",
+      "ok": true,
+      "claims": [
+        {
+          "id": "speed-curve",
+          "statement": "Start SPEED=6.0; each tick add ACCELERATION=0.001 while below MAX_SPEED=13.0; clamp at 13.0",
+          "confidence": 0.94,
+          "authority": "inferred",
+          "limitations": [
+            "Discrete tick samples; clamp inferred from plateau"
+          ],
+          "covers_eval": [
+            "spd_00",
+            "spd_01",
+            "spd_02",
+            "spd_03",
+            "spd_04",
+            "spd_05",
+            "spd_06",
+            "spd_07"
+          ]
+        }
+      ],
+      "eval_rows": [
+        {
+          "id": "spd_00",
+          "ok": true,
+          "expect": 6.0,
+          "got": 6.0,
+          "error": null,
+          "description": "0 ticks \u2192 6.0"
+        },
+        {
+          "id": "spd_01",
+          "ok": true,
+          "expect": 6.5,
+          "got": 6.5,
+          "error": null,
+          "description": "500 ticks \u2192 6.5"
+        },
+        {
+          "id": "spd_02",
+          "ok": true,
+          "expect": 7.0,
+          "got": 7.0,
+          "error": null,
+          "description": "1000 ticks \u2192 7.0"
+        },
+        {
+          "id": "spd_03",
+          "ok": true,
+          "expect": 8.0,
+          "got": 8.0,
+          "error": null,
+          "description": "2000 ticks \u2192 8.0"
+        },
+        {
+          "id": "spd_04",
+          "ok": true,
+          "expect": 10.0,
+          "got": 10.0,
+          "error": null,
+          "description": "4000 ticks \u2192 10.0"
+        },
+        {
+          "id": "spd_05",
+          "ok": true,
+          "expect": 13.0,
+          "got": 13.0,
+          "error": null,
+          "description": "7000 ticks \u2192 13.0"
+        },
+        {
+          "id": "spd_06",
+          "ok": true,
+          "expect": 13.0,
+          "got": 13.0,
+          "error": null,
+          "description": "10000 ticks \u2192 13.0"
+        },
+        {
+          "id": "spd_07",
+          "ok": true,
+          "expect": 13.0,
+          "got": 13.0,
+          "error": null,
+          "description": "15000 ticks \u2192 13.0"
+        }
+      ],
+      "errors": [],
+      "paths": {
+        "rebuild": "/Users/yupeng/Projects/rea-workbench/reports/artifacts/speed_ramp/rebuild.py",
+        "evidence": "/Users/yupeng/Projects/rea-workbench/reports/artifacts/speed_ramp/evidence.json",
+        "evals": "/Users/yupeng/Projects/rea-workbench/reports/artifacts/speed_ramp/evals.json",
+        "summary": "/Users/yupeng/Projects/rea-workbench/reports/artifacts/speed_ramp/recovery.json"
+      },
+      "traces_path": "/Users/yupeng/Projects/rea-workbench/fixtures/traces/speed_ramp.json",
+      "n_traces": 8,
+      "params": {
+        "speed": 6.0,
+        "acceleration": 0.001,
+        "max_speed": 13.0,
+        "residual": 0.0
+      }
+    }
+  ]
+}

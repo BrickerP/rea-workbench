@@ -1,0 +1,6 @@
+{
+  "case": "speed_ramp",
+  "n_traces": 8,
+  "digest": "sha256:1c5c884e0ddc726ed10b749585c774a6823f314986821131d2425d2fff56c534",
+  "note": "I/O traces only \u2014 black-box source not included"
+}

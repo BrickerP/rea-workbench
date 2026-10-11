@@ -1,0 +1,6 @@
+{
+  "case": "percent_rule",
+  "n_traces": 12,
+  "digest": "sha256:ea0768b22db9f00c5419abcf7d35f7a7ef9d134d901fc252545e81523d398ba4",
+  "note": "I/O traces only \u2014 black-box source not included"
+}

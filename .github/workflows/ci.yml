@@ -1,0 +1,20 @@
+name: CI
+on:
+  push:
+    branches: [main]
+  pull_request:
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Unit tests
+        env:
+          PYTHONPATH: src:vendor
+        run: python3 -m unittest discover -s tests -v
+      - name: Demo (full E2E)
+        env:
+          PYTHONPATH: src:vendor
+        run: python3 -m rea_workbench demo
+      - name: Report artifact exists
+        run: test -f docs/demo-report.html

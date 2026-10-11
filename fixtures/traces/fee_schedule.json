@@ -1,0 +1,194 @@
+[
+  {
+    "id": "fee_00",
+    "input": {
+      "amount": 25.0,
+      "tier": "standard"
+    },
+    "output": 6.0
+  },
+  {
+    "id": "fee_01",
+    "input": {
+      "amount": 10.0,
+      "tier": "silver"
+    },
+    "output": 4.5
+  },
+  {
+    "id": "fee_02",
+    "input": {
+      "amount": 75.0,
+      "tier": "gold"
+    },
+    "output": 2.0
+  },
+  {
+    "id": "fee_03",
+    "input": {
+      "amount": 50.0,
+      "tier": "standard"
+    },
+    "output": 5.0
+  },
+  {
+    "id": "fee_04",
+    "input": {
+      "amount": 50.0,
+      "tier": "silver"
+    },
+    "output": 3.5
+  },
+  {
+    "id": "fee_05",
+    "input": {
+      "amount": 49.99,
+      "tier": "gold"
+    },
+    "output": 3.0
+  },
+  {
+    "id": "fee_06",
+    "input": {
+      "amount": 25.0,
+      "tier": "standard"
+    },
+    "output": 6.0
+  },
+  {
+    "id": "fee_07",
+    "input": {
+      "amount": 1000.0,
+      "tier": "silver"
+    },
+    "output": 22.0
+  },
+  {
+    "id": "fee_08",
+    "input": {
+      "amount": 25.0,
+      "tier": "gold"
+    },
+    "output": 3.0
+  },
+  {
+    "id": "fee_09",
+    "input": {
+      "amount": 2500.0,
+      "tier": "standard"
+    },
+    "output": 72.5
+  },
+  {
+    "id": "fee_10",
+    "input": {
+      "amount": 1268.66,
+      "tier": "silver"
+    },
+    "output": 27.91
+  },
+  {
+    "id": "fee_11",
+    "input": {
+      "amount": 94.24,
+      "tier": "gold"
+    },
+    "output": 2.0
+  },
+  {
+    "id": "fee_12",
+    "input": {
+      "amount": 659.82,
+      "tier": "gold"
+    },
+    "output": 9.9
+  },
+  {
+    "id": "fee_13",
+    "input": {
+      "amount": 1808.05,
+      "tier": "gold"
+    },
+    "output": 27.12
+  },
+  {
+    "id": "fee_14",
+    "input": {
+      "amount": 600.52,
+      "tier": "gold"
+    },
+    "output": 9.01
+  },
+  {
+    "id": "fee_15",
+    "input": {
+      "amount": 2105.47,
+      "tier": "silver"
+    },
+    "output": 46.32
+  },
+  {
+    "id": "fee_16",
+    "input": {
+      "amount": 665.22,
+      "tier": "gold"
+    },
+    "output": 9.98
+  },
+  {
+    "id": "fee_17",
+    "input": {
+      "amount": 838.18,
+      "tier": "standard"
+    },
+    "output": 24.31
+  },
+  {
+    "id": "fee_18",
+    "input": {
+      "amount": 2277.63,
+      "tier": "standard"
+    },
+    "output": 66.05
+  },
+  {
+    "id": "fee_19",
+    "input": {
+      "amount": 2095.93,
+      "tier": "silver"
+    },
+    "output": 46.11
+  },
+  {
+    "id": "fee_20",
+    "input": {
+      "amount": 837.22,
+      "tier": "standard"
+    },
+    "output": 24.28
+  },
+  {
+    "id": "fee_21",
+    "input": {
+      "amount": 2871.85,
+      "tier": "silver"
+    },
+    "output": 63.18
+  },
+  {
+    "id": "fee_22",
+    "input": {
+      "amount": 311.12,
+      "tier": "silver"
+    },
+    "output": 6.84
+  },
+  {
+    "id": "fee_23",
+    "input": {
+      "amount": 294.67,
+      "tier": "silver"
+    },
+    "output": 6.48
+  }
+]
