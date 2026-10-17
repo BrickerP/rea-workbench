@@ -1,0 +1,2064 @@
+{
+  "researchCommit": "f334078b7752cbca47afba6c97db2ec4a0d8cf2c",
+  "synthetic": true,
+  "modelCalls": 0,
+  "productionData": false,
+  "sourceHashes": {
+    "src/rea_workbench/recover.py": "48ac99b775fbf8e1723640b378049d0ea92c05012ab581455087ea64842f4247",
+    "src/rea_workbench/pipeline.py": "379642391466cc5df403955d92b05f6df63e881be02159c4a5a659961612f826",
+    "src/rea_workbench/propose.py": "37b758ba287e6fc798831e46b5219ee0709936f64d6db1dde79e881022115eb6",
+    "src/rea_workbench/blackbox.py": "1e770c0b709d36c955156f253cc77107a4d912e3079be0803d8ebe1c1940c2ad",
+    "vendor/rea_rebuild_gate.py": "6fa27d13045f25090963daaa43beae38a84cee6c70249b423feb788506d39c1a",
+    "fixtures/traces/fee_schedule.json": "af45cea32d28e8b79bc8b2cd81ee8e20bdbf4503c571b1e18a64e59d07f7d049"
+  },
+  "originalFixture": {
+    "rows": 24,
+    "uniqueInputs": 23
+  },
+  "controlledTraining": {
+    "amounts": [
+      10.0,
+      49.99,
+      50.0,
+      55.0,
+      59.99,
+      60.0,
+      1000.0,
+      2500.0
+    ],
+    "tiers": [
+      "standard",
+      "silver",
+      "gold"
+    ],
+    "rows": 24
+  },
+  "heldOut": {
+    "amounts": [
+      5.0,
+      12.34,
+      49.0,
+      49.98,
+      50.01,
+      54.99,
+      59.98,
+      60.02,
+      60.5,
+      99.99,
+      150.0,
+      777.77
+    ],
+    "tiers": [
+      "standard",
+      "silver",
+      "gold"
+    ],
+    "rows": 36
+  },
+  "metric": "exact fee match; abs(error) < 1e-9",
+  "scope": "deterministic fee recovery; not an LLM or production benchmark",
+  "conditions": {
+    "original_50": {
+      "cutoffInSyntheticOracle": 50.0,
+      "unchangedPipelineGateOk": true,
+      "pipelineErrors": [],
+      "pipelineClaims": [
+        {
+          "id": "tier-rates",
+          "statement": "Per-tier fee = max(floor, amount * rate); gold: rate=0.015, floor=2.0, silver: rate=0.022, floor=3.5, standard: rate=0.029, floor=5.0",
+          "confidence": 0.99,
+          "authority": "inferred",
+          "limitations": [
+            "Fitted from traces only; tier set limited to observed labels"
+          ],
+          "covers_eval": [
+            "fee_02",
+            "fee_03",
+            "fee_04",
+            "fee_07",
+            "fee_09",
+            "fee_10",
+            "fee_11",
+            "fee_12",
+            "fee_13",
+            "fee_14",
+            "fee_15",
+            "fee_16",
+            "fee_17",
+            "fee_18",
+            "fee_19",
+            "fee_20",
+            "fee_21",
+            "fee_22",
+            "fee_23"
+          ]
+        },
+        {
+          "id": "under-50-surcharge",
+          "statement": "When amount < 50, add flat surcharge 1.0",
+          "confidence": 0.99,
+          "authority": "inferred",
+          "limitations": [
+            "Threshold 50 inferred from residual pattern on small amounts"
+          ],
+          "covers_eval": [
+            "fee_00",
+            "fee_01",
+            "fee_05",
+            "fee_06",
+            "fee_08"
+          ]
+        }
+      ],
+      "emittedSourceSha256": "077612c3f4f33c761df9e84140048ddfb3d2c882397eed29ceb505b54cf3869f",
+      "training": {
+        "passed": 24,
+        "total": 24,
+        "rows": [
+          {
+            "id": "fee_00",
+            "input": {
+              "amount": 25.0,
+              "tier": "standard"
+            },
+            "output": 6.0,
+            "got": 6.0,
+            "ok": true
+          },
+          {
+            "id": "fee_01",
+            "input": {
+              "amount": 10.0,
+              "tier": "silver"
+            },
+            "output": 4.5,
+            "got": 4.5,
+            "ok": true
+          },
+          {
+            "id": "fee_02",
+            "input": {
+              "amount": 75.0,
+              "tier": "gold"
+            },
+            "output": 2.0,
+            "got": 2.0,
+            "ok": true
+          },
+          {
+            "id": "fee_03",
+            "input": {
+              "amount": 50.0,
+              "tier": "standard"
+            },
+            "output": 5.0,
+            "got": 5.0,
+            "ok": true
+          },
+          {
+            "id": "fee_04",
+            "input": {
+              "amount": 50.0,
+              "tier": "silver"
+            },
+            "output": 3.5,
+            "got": 3.5,
+            "ok": true
+          },
+          {
+            "id": "fee_05",
+            "input": {
+              "amount": 49.99,
+              "tier": "gold"
+            },
+            "output": 3.0,
+            "got": 3.0,
+            "ok": true
+          },
+          {
+            "id": "fee_06",
+            "input": {
+              "amount": 25.0,
+              "tier": "standard"
+            },
+            "output": 6.0,
+            "got": 6.0,
+            "ok": true
+          },
+          {
+            "id": "fee_07",
+            "input": {
+              "amount": 1000.0,
+              "tier": "silver"
+            },
+            "output": 22.0,
+            "got": 22.0,
+            "ok": true
+          },
+          {
+            "id": "fee_08",
+            "input": {
+              "amount": 25.0,
+              "tier": "gold"
+            },
+            "output": 3.0,
+            "got": 3.0,
+            "ok": true
+          },
+          {
+            "id": "fee_09",
+            "input": {
+              "amount": 2500.0,
+              "tier": "standard"
+            },
+            "output": 72.5,
+            "got": 72.5,
+            "ok": true
+          },
+          {
+            "id": "fee_10",
+            "input": {
+              "amount": 1268.66,
+              "tier": "silver"
+            },
+            "output": 27.91,
+            "got": 27.91,
+            "ok": true
+          },
+          {
+            "id": "fee_11",
+            "input": {
+              "amount": 94.24,
+              "tier": "gold"
+            },
+            "output": 2.0,
+            "got": 2.0,
+            "ok": true
+          },
+          {
+            "id": "fee_12",
+            "input": {
+              "amount": 659.82,
+              "tier": "gold"
+            },
+            "output": 9.9,
+            "got": 9.9,
+            "ok": true
+          },
+          {
+            "id": "fee_13",
+            "input": {
+              "amount": 1808.05,
+              "tier": "gold"
+            },
+            "output": 27.12,
+            "got": 27.12,
+            "ok": true
+          },
+          {
+            "id": "fee_14",
+            "input": {
+              "amount": 600.52,
+              "tier": "gold"
+            },
+            "output": 9.01,
+            "got": 9.01,
+            "ok": true
+          },
+          {
+            "id": "fee_15",
+            "input": {
+              "amount": 2105.47,
+              "tier": "silver"
+            },
+            "output": 46.32,
+            "got": 46.32,
+            "ok": true
+          },
+          {
+            "id": "fee_16",
+            "input": {
+              "amount": 665.22,
+              "tier": "gold"
+            },
+            "output": 9.98,
+            "got": 9.98,
+            "ok": true
+          },
+          {
+            "id": "fee_17",
+            "input": {
+              "amount": 838.18,
+              "tier": "standard"
+            },
+            "output": 24.31,
+            "got": 24.31,
+            "ok": true
+          },
+          {
+            "id": "fee_18",
+            "input": {
+              "amount": 2277.63,
+              "tier": "standard"
+            },
+            "output": 66.05,
+            "got": 66.05,
+            "ok": true
+          },
+          {
+            "id": "fee_19",
+            "input": {
+              "amount": 2095.93,
+              "tier": "silver"
+            },
+            "output": 46.11,
+            "got": 46.11,
+            "ok": true
+          },
+          {
+            "id": "fee_20",
+            "input": {
+              "amount": 837.22,
+              "tier": "standard"
+            },
+            "output": 24.28,
+            "got": 24.28,
+            "ok": true
+          },
+          {
+            "id": "fee_21",
+            "input": {
+              "amount": 2871.85,
+              "tier": "silver"
+            },
+            "output": 63.18,
+            "got": 63.18,
+            "ok": true
+          },
+          {
+            "id": "fee_22",
+            "input": {
+              "amount": 311.12,
+              "tier": "silver"
+            },
+            "output": 6.84,
+            "got": 6.84,
+            "ok": true
+          },
+          {
+            "id": "fee_23",
+            "input": {
+              "amount": 294.67,
+              "tier": "silver"
+            },
+            "output": 6.48,
+            "got": 6.48,
+            "ok": true
+          }
+        ]
+      },
+      "heldOut": {
+        "passed": 36,
+        "total": 36,
+        "rows": [
+          {
+            "id": "original_50_heldout_standard_00",
+            "input": {
+              "amount": 5.0,
+              "tier": "standard"
+            },
+            "output": 6.0,
+            "got": 6.0,
+            "ok": true
+          },
+          {
+            "id": "original_50_heldout_standard_01",
+            "input": {
+              "amount": 12.34,
+              "tier": "standard"
+            },
+            "output": 6.0,
+            "got": 6.0,
+            "ok": true
+          },
+          {
+            "id": "original_50_heldout_standard_02",
+            "input": {
+              "amount": 49.0,
+              "tier": "standard"
+            },
+            "output": 6.0,
+            "got": 6.0,
+            "ok": true
+          },
+          {
+            "id": "original_50_heldout_standard_03",
+            "input": {
+              "amount": 49.98,
+              "tier": "standard"
+            },
+            "output": 6.0,
+            "got": 6.0,
+            "ok": true
+          },
+          {
+            "id": "original_50_heldout_standard_04",
+            "input": {
+              "amount": 50.01,
+              "tier": "standard"
+            },
+            "output": 5.0,
+            "got": 5.0,
+            "ok": true
+          },
+          {
+            "id": "original_50_heldout_standard_05",
+            "input": {
+              "amount": 54.99,
+              "tier": "standard"
+            },
+            "output": 5.0,
+            "got": 5.0,
+            "ok": true
+          },
+          {
+            "id": "original_50_heldout_standard_06",
+            "input": {
+              "amount": 59.98,
+              "tier": "standard"
+            },
+            "output": 5.0,
+            "got": 5.0,
+            "ok": true
+          },
+          {
+            "id": "original_50_heldout_standard_07",
+            "input": {
+              "amount": 60.02,
+              "tier": "standard"
+            },
+            "output": 5.0,
+            "got": 5.0,
+            "ok": true
+          },
+          {
+            "id": "original_50_heldout_standard_08",
+            "input": {
+              "amount": 60.5,
+              "tier": "standard"
+            },
+            "output": 5.0,
+            "got": 5.0,
+            "ok": true
+          },
+          {
+            "id": "original_50_heldout_standard_09",
+            "input": {
+              "amount": 99.99,
+              "tier": "standard"
+            },
+            "output": 5.0,
+            "got": 5.0,
+            "ok": true
+          },
+          {
+            "id": "original_50_heldout_standard_10",
+            "input": {
+              "amount": 150.0,
+              "tier": "standard"
+            },
+            "output": 5.0,
+            "got": 5.0,
+            "ok": true
+          },
+          {
+            "id": "original_50_heldout_standard_11",
+            "input": {
+              "amount": 777.77,
+              "tier": "standard"
+            },
+            "output": 22.56,
+            "got": 22.56,
+            "ok": true
+          },
+          {
+            "id": "original_50_heldout_silver_00",
+            "input": {
+              "amount": 5.0,
+              "tier": "silver"
+            },
+            "output": 4.5,
+            "got": 4.5,
+            "ok": true
+          },
+          {
+            "id": "original_50_heldout_silver_01",
+            "input": {
+              "amount": 12.34,
+              "tier": "silver"
+            },
+            "output": 4.5,
+            "got": 4.5,
+            "ok": true
+          },
+          {
+            "id": "original_50_heldout_silver_02",
+            "input": {
+              "amount": 49.0,
+              "tier": "silver"
+            },
+            "output": 4.5,
+            "got": 4.5,
+            "ok": true
+          },
+          {
+            "id": "original_50_heldout_silver_03",
+            "input": {
+              "amount": 49.98,
+              "tier": "silver"
+            },
+            "output": 4.5,
+            "got": 4.5,
+            "ok": true
+          },
+          {
+            "id": "original_50_heldout_silver_04",
+            "input": {
+              "amount": 50.01,
+              "tier": "silver"
+            },
+            "output": 3.5,
+            "got": 3.5,
+            "ok": true
+          },
+          {
+            "id": "original_50_heldout_silver_05",
+            "input": {
+              "amount": 54.99,
+              "tier": "silver"
+            },
+            "output": 3.5,
+            "got": 3.5,
+            "ok": true
+          },
+          {
+            "id": "original_50_heldout_silver_06",
+            "input": {
+              "amount": 59.98,
+              "tier": "silver"
+            },
+            "output": 3.5,
+            "got": 3.5,
+            "ok": true
+          },
+          {
+            "id": "original_50_heldout_silver_07",
+            "input": {
+              "amount": 60.02,
+              "tier": "silver"
+            },
+            "output": 3.5,
+            "got": 3.5,
+            "ok": true
+          },
+          {
+            "id": "original_50_heldout_silver_08",
+            "input": {
+              "amount": 60.5,
+              "tier": "silver"
+            },
+            "output": 3.5,
+            "got": 3.5,
+            "ok": true
+          },
+          {
+            "id": "original_50_heldout_silver_09",
+            "input": {
+              "amount": 99.99,
+              "tier": "silver"
+            },
+            "output": 3.5,
+            "got": 3.5,
+            "ok": true
+          },
+          {
+            "id": "original_50_heldout_silver_10",
+            "input": {
+              "amount": 150.0,
+              "tier": "silver"
+            },
+            "output": 3.5,
+            "got": 3.5,
+            "ok": true
+          },
+          {
+            "id": "original_50_heldout_silver_11",
+            "input": {
+              "amount": 777.77,
+              "tier": "silver"
+            },
+            "output": 17.11,
+            "got": 17.11,
+            "ok": true
+          },
+          {
+            "id": "original_50_heldout_gold_00",
+            "input": {
+              "amount": 5.0,
+              "tier": "gold"
+            },
+            "output": 3.0,
+            "got": 3.0,
+            "ok": true
+          },
+          {
+            "id": "original_50_heldout_gold_01",
+            "input": {
+              "amount": 12.34,
+              "tier": "gold"
+            },
+            "output": 3.0,
+            "got": 3.0,
+            "ok": true
+          },
+          {
+            "id": "original_50_heldout_gold_02",
+            "input": {
+              "amount": 49.0,
+              "tier": "gold"
+            },
+            "output": 3.0,
+            "got": 3.0,
+            "ok": true
+          },
+          {
+            "id": "original_50_heldout_gold_03",
+            "input": {
+              "amount": 49.98,
+              "tier": "gold"
+            },
+            "output": 3.0,
+            "got": 3.0,
+            "ok": true
+          },
+          {
+            "id": "original_50_heldout_gold_04",
+            "input": {
+              "amount": 50.01,
+              "tier": "gold"
+            },
+            "output": 2.0,
+            "got": 2.0,
+            "ok": true
+          },
+          {
+            "id": "original_50_heldout_gold_05",
+            "input": {
+              "amount": 54.99,
+              "tier": "gold"
+            },
+            "output": 2.0,
+            "got": 2.0,
+            "ok": true
+          },
+          {
+            "id": "original_50_heldout_gold_06",
+            "input": {
+              "amount": 59.98,
+              "tier": "gold"
+            },
+            "output": 2.0,
+            "got": 2.0,
+            "ok": true
+          },
+          {
+            "id": "original_50_heldout_gold_07",
+            "input": {
+              "amount": 60.02,
+              "tier": "gold"
+            },
+            "output": 2.0,
+            "got": 2.0,
+            "ok": true
+          },
+          {
+            "id": "original_50_heldout_gold_08",
+            "input": {
+              "amount": 60.5,
+              "tier": "gold"
+            },
+            "output": 2.0,
+            "got": 2.0,
+            "ok": true
+          },
+          {
+            "id": "original_50_heldout_gold_09",
+            "input": {
+              "amount": 99.99,
+              "tier": "gold"
+            },
+            "output": 2.0,
+            "got": 2.0,
+            "ok": true
+          },
+          {
+            "id": "original_50_heldout_gold_10",
+            "input": {
+              "amount": 150.0,
+              "tier": "gold"
+            },
+            "output": 2.25,
+            "got": 2.25,
+            "ok": true
+          },
+          {
+            "id": "original_50_heldout_gold_11",
+            "input": {
+              "amount": 777.77,
+              "tier": "gold"
+            },
+            "output": 11.67,
+            "got": 11.67,
+            "ok": true
+          }
+        ]
+      }
+    },
+    "controlled_50": {
+      "cutoffInSyntheticOracle": 50.0,
+      "unchangedPipelineGateOk": true,
+      "pipelineErrors": [],
+      "pipelineClaims": [
+        {
+          "id": "tier-rates",
+          "statement": "Per-tier fee = max(floor, amount * rate); gold: rate=0.015, floor=2.0, silver: rate=0.022, floor=3.5, standard: rate=0.029, floor=5.0",
+          "confidence": 0.99,
+          "authority": "inferred",
+          "limitations": [
+            "Fitted from traces only; tier set limited to observed labels"
+          ],
+          "covers_eval": [
+            "controlled_50_standard_02",
+            "controlled_50_standard_03",
+            "controlled_50_standard_04",
+            "controlled_50_standard_05",
+            "controlled_50_standard_06",
+            "controlled_50_standard_07",
+            "controlled_50_silver_02",
+            "controlled_50_silver_03",
+            "controlled_50_silver_04",
+            "controlled_50_silver_05",
+            "controlled_50_silver_06",
+            "controlled_50_silver_07",
+            "controlled_50_gold_02",
+            "controlled_50_gold_03",
+            "controlled_50_gold_04",
+            "controlled_50_gold_05",
+            "controlled_50_gold_06",
+            "controlled_50_gold_07"
+          ]
+        },
+        {
+          "id": "under-50-surcharge",
+          "statement": "When amount < 50, add flat surcharge 1.0",
+          "confidence": 0.99,
+          "authority": "inferred",
+          "limitations": [
+            "Threshold 50 inferred from residual pattern on small amounts"
+          ],
+          "covers_eval": [
+            "controlled_50_standard_00",
+            "controlled_50_standard_01",
+            "controlled_50_silver_00",
+            "controlled_50_silver_01",
+            "controlled_50_gold_00",
+            "controlled_50_gold_01"
+          ]
+        }
+      ],
+      "emittedSourceSha256": "077612c3f4f33c761df9e84140048ddfb3d2c882397eed29ceb505b54cf3869f",
+      "training": {
+        "passed": 24,
+        "total": 24,
+        "rows": [
+          {
+            "id": "controlled_50_standard_00",
+            "input": {
+              "amount": 10.0,
+              "tier": "standard"
+            },
+            "output": 6.0,
+            "got": 6.0,
+            "ok": true
+          },
+          {
+            "id": "controlled_50_standard_01",
+            "input": {
+              "amount": 49.99,
+              "tier": "standard"
+            },
+            "output": 6.0,
+            "got": 6.0,
+            "ok": true
+          },
+          {
+            "id": "controlled_50_standard_02",
+            "input": {
+              "amount": 50.0,
+              "tier": "standard"
+            },
+            "output": 5.0,
+            "got": 5.0,
+            "ok": true
+          },
+          {
+            "id": "controlled_50_standard_03",
+            "input": {
+              "amount": 55.0,
+              "tier": "standard"
+            },
+            "output": 5.0,
+            "got": 5.0,
+            "ok": true
+          },
+          {
+            "id": "controlled_50_standard_04",
+            "input": {
+              "amount": 59.99,
+              "tier": "standard"
+            },
+            "output": 5.0,
+            "got": 5.0,
+            "ok": true
+          },
+          {
+            "id": "controlled_50_standard_05",
+            "input": {
+              "amount": 60.0,
+              "tier": "standard"
+            },
+            "output": 5.0,
+            "got": 5.0,
+            "ok": true
+          },
+          {
+            "id": "controlled_50_standard_06",
+            "input": {
+              "amount": 1000.0,
+              "tier": "standard"
+            },
+            "output": 29.0,
+            "got": 29.0,
+            "ok": true
+          },
+          {
+            "id": "controlled_50_standard_07",
+            "input": {
+              "amount": 2500.0,
+              "tier": "standard"
+            },
+            "output": 72.5,
+            "got": 72.5,
+            "ok": true
+          },
+          {
+            "id": "controlled_50_silver_00",
+            "input": {
+              "amount": 10.0,
+              "tier": "silver"
+            },
+            "output": 4.5,
+            "got": 4.5,
+            "ok": true
+          },
+          {
+            "id": "controlled_50_silver_01",
+            "input": {
+              "amount": 49.99,
+              "tier": "silver"
+            },
+            "output": 4.5,
+            "got": 4.5,
+            "ok": true
+          },
+          {
+            "id": "controlled_50_silver_02",
+            "input": {
+              "amount": 50.0,
+              "tier": "silver"
+            },
+            "output": 3.5,
+            "got": 3.5,
+            "ok": true
+          },
+          {
+            "id": "controlled_50_silver_03",
+            "input": {
+              "amount": 55.0,
+              "tier": "silver"
+            },
+            "output": 3.5,
+            "got": 3.5,
+            "ok": true
+          },
+          {
+            "id": "controlled_50_silver_04",
+            "input": {
+              "amount": 59.99,
+              "tier": "silver"
+            },
+            "output": 3.5,
+            "got": 3.5,
+            "ok": true
+          },
+          {
+            "id": "controlled_50_silver_05",
+            "input": {
+              "amount": 60.0,
+              "tier": "silver"
+            },
+            "output": 3.5,
+            "got": 3.5,
+            "ok": true
+          },
+          {
+            "id": "controlled_50_silver_06",
+            "input": {
+              "amount": 1000.0,
+              "tier": "silver"
+            },
+            "output": 22.0,
+            "got": 22.0,
+            "ok": true
+          },
+          {
+            "id": "controlled_50_silver_07",
+            "input": {
+              "amount": 2500.0,
+              "tier": "silver"
+            },
+            "output": 55.0,
+            "got": 55.0,
+            "ok": true
+          },
+          {
+            "id": "controlled_50_gold_00",
+            "input": {
+              "amount": 10.0,
+              "tier": "gold"
+            },
+            "output": 3.0,
+            "got": 3.0,
+            "ok": true
+          },
+          {
+            "id": "controlled_50_gold_01",
+            "input": {
+              "amount": 49.99,
+              "tier": "gold"
+            },
+            "output": 3.0,
+            "got": 3.0,
+            "ok": true
+          },
+          {
+            "id": "controlled_50_gold_02",
+            "input": {
+              "amount": 50.0,
+              "tier": "gold"
+            },
+            "output": 2.0,
+            "got": 2.0,
+            "ok": true
+          },
+          {
+            "id": "controlled_50_gold_03",
+            "input": {
+              "amount": 55.0,
+              "tier": "gold"
+            },
+            "output": 2.0,
+            "got": 2.0,
+            "ok": true
+          },
+          {
+            "id": "controlled_50_gold_04",
+            "input": {
+              "amount": 59.99,
+              "tier": "gold"
+            },
+            "output": 2.0,
+            "got": 2.0,
+            "ok": true
+          },
+          {
+            "id": "controlled_50_gold_05",
+            "input": {
+              "amount": 60.0,
+              "tier": "gold"
+            },
+            "output": 2.0,
+            "got": 2.0,
+            "ok": true
+          },
+          {
+            "id": "controlled_50_gold_06",
+            "input": {
+              "amount": 1000.0,
+              "tier": "gold"
+            },
+            "output": 15.0,
+            "got": 15.0,
+            "ok": true
+          },
+          {
+            "id": "controlled_50_gold_07",
+            "input": {
+              "amount": 2500.0,
+              "tier": "gold"
+            },
+            "output": 37.5,
+            "got": 37.5,
+            "ok": true
+          }
+        ]
+      },
+      "heldOut": {
+        "passed": 36,
+        "total": 36,
+        "rows": [
+          {
+            "id": "controlled_50_heldout_standard_00",
+            "input": {
+              "amount": 5.0,
+              "tier": "standard"
+            },
+            "output": 6.0,
+            "got": 6.0,
+            "ok": true
+          },
+          {
+            "id": "controlled_50_heldout_standard_01",
+            "input": {
+              "amount": 12.34,
+              "tier": "standard"
+            },
+            "output": 6.0,
+            "got": 6.0,
+            "ok": true
+          },
+          {
+            "id": "controlled_50_heldout_standard_02",
+            "input": {
+              "amount": 49.0,
+              "tier": "standard"
+            },
+            "output": 6.0,
+            "got": 6.0,
+            "ok": true
+          },
+          {
+            "id": "controlled_50_heldout_standard_03",
+            "input": {
+              "amount": 49.98,
+              "tier": "standard"
+            },
+            "output": 6.0,
+            "got": 6.0,
+            "ok": true
+          },
+          {
+            "id": "controlled_50_heldout_standard_04",
+            "input": {
+              "amount": 50.01,
+              "tier": "standard"
+            },
+            "output": 5.0,
+            "got": 5.0,
+            "ok": true
+          },
+          {
+            "id": "controlled_50_heldout_standard_05",
+            "input": {
+              "amount": 54.99,
+              "tier": "standard"
+            },
+            "output": 5.0,
+            "got": 5.0,
+            "ok": true
+          },
+          {
+            "id": "controlled_50_heldout_standard_06",
+            "input": {
+              "amount": 59.98,
+              "tier": "standard"
+            },
+            "output": 5.0,
+            "got": 5.0,
+            "ok": true
+          },
+          {
+            "id": "controlled_50_heldout_standard_07",
+            "input": {
+              "amount": 60.02,
+              "tier": "standard"
+            },
+            "output": 5.0,
+            "got": 5.0,
+            "ok": true
+          },
+          {
+            "id": "controlled_50_heldout_standard_08",
+            "input": {
+              "amount": 60.5,
+              "tier": "standard"
+            },
+            "output": 5.0,
+            "got": 5.0,
+            "ok": true
+          },
+          {
+            "id": "controlled_50_heldout_standard_09",
+            "input": {
+              "amount": 99.99,
+              "tier": "standard"
+            },
+            "output": 5.0,
+            "got": 5.0,
+            "ok": true
+          },
+          {
+            "id": "controlled_50_heldout_standard_10",
+            "input": {
+              "amount": 150.0,
+              "tier": "standard"
+            },
+            "output": 5.0,
+            "got": 5.0,
+            "ok": true
+          },
+          {
+            "id": "controlled_50_heldout_standard_11",
+            "input": {
+              "amount": 777.77,
+              "tier": "standard"
+            },
+            "output": 22.56,
+            "got": 22.56,
+            "ok": true
+          },
+          {
+            "id": "controlled_50_heldout_silver_00",
+            "input": {
+              "amount": 5.0,
+              "tier": "silver"
+            },
+            "output": 4.5,
+            "got": 4.5,
+            "ok": true
+          },
+          {
+            "id": "controlled_50_heldout_silver_01",
+            "input": {
+              "amount": 12.34,
+              "tier": "silver"
+            },
+            "output": 4.5,
+            "got": 4.5,
+            "ok": true
+          },
+          {
+            "id": "controlled_50_heldout_silver_02",
+            "input": {
+              "amount": 49.0,
+              "tier": "silver"
+            },
+            "output": 4.5,
+            "got": 4.5,
+            "ok": true
+          },
+          {
+            "id": "controlled_50_heldout_silver_03",
+            "input": {
+              "amount": 49.98,
+              "tier": "silver"
+            },
+            "output": 4.5,
+            "got": 4.5,
+            "ok": true
+          },
+          {
+            "id": "controlled_50_heldout_silver_04",
+            "input": {
+              "amount": 50.01,
+              "tier": "silver"
+            },
+            "output": 3.5,
+            "got": 3.5,
+            "ok": true
+          },
+          {
+            "id": "controlled_50_heldout_silver_05",
+            "input": {
+              "amount": 54.99,
+              "tier": "silver"
+            },
+            "output": 3.5,
+            "got": 3.5,
+            "ok": true
+          },
+          {
+            "id": "controlled_50_heldout_silver_06",
+            "input": {
+              "amount": 59.98,
+              "tier": "silver"
+            },
+            "output": 3.5,
+            "got": 3.5,
+            "ok": true
+          },
+          {
+            "id": "controlled_50_heldout_silver_07",
+            "input": {
+              "amount": 60.02,
+              "tier": "silver"
+            },
+            "output": 3.5,
+            "got": 3.5,
+            "ok": true
+          },
+          {
+            "id": "controlled_50_heldout_silver_08",
+            "input": {
+              "amount": 60.5,
+              "tier": "silver"
+            },
+            "output": 3.5,
+            "got": 3.5,
+            "ok": true
+          },
+          {
+            "id": "controlled_50_heldout_silver_09",
+            "input": {
+              "amount": 99.99,
+              "tier": "silver"
+            },
+            "output": 3.5,
+            "got": 3.5,
+            "ok": true
+          },
+          {
+            "id": "controlled_50_heldout_silver_10",
+            "input": {
+              "amount": 150.0,
+              "tier": "silver"
+            },
+            "output": 3.5,
+            "got": 3.5,
+            "ok": true
+          },
+          {
+            "id": "controlled_50_heldout_silver_11",
+            "input": {
+              "amount": 777.77,
+              "tier": "silver"
+            },
+            "output": 17.11,
+            "got": 17.11,
+            "ok": true
+          },
+          {
+            "id": "controlled_50_heldout_gold_00",
+            "input": {
+              "amount": 5.0,
+              "tier": "gold"
+            },
+            "output": 3.0,
+            "got": 3.0,
+            "ok": true
+          },
+          {
+            "id": "controlled_50_heldout_gold_01",
+            "input": {
+              "amount": 12.34,
+              "tier": "gold"
+            },
+            "output": 3.0,
+            "got": 3.0,
+            "ok": true
+          },
+          {
+            "id": "controlled_50_heldout_gold_02",
+            "input": {
+              "amount": 49.0,
+              "tier": "gold"
+            },
+            "output": 3.0,
+            "got": 3.0,
+            "ok": true
+          },
+          {
+            "id": "controlled_50_heldout_gold_03",
+            "input": {
+              "amount": 49.98,
+              "tier": "gold"
+            },
+            "output": 3.0,
+            "got": 3.0,
+            "ok": true
+          },
+          {
+            "id": "controlled_50_heldout_gold_04",
+            "input": {
+              "amount": 50.01,
+              "tier": "gold"
+            },
+            "output": 2.0,
+            "got": 2.0,
+            "ok": true
+          },
+          {
+            "id": "controlled_50_heldout_gold_05",
+            "input": {
+              "amount": 54.99,
+              "tier": "gold"
+            },
+            "output": 2.0,
+            "got": 2.0,
+            "ok": true
+          },
+          {
+            "id": "controlled_50_heldout_gold_06",
+            "input": {
+              "amount": 59.98,
+              "tier": "gold"
+            },
+            "output": 2.0,
+            "got": 2.0,
+            "ok": true
+          },
+          {
+            "id": "controlled_50_heldout_gold_07",
+            "input": {
+              "amount": 60.02,
+              "tier": "gold"
+            },
+            "output": 2.0,
+            "got": 2.0,
+            "ok": true
+          },
+          {
+            "id": "controlled_50_heldout_gold_08",
+            "input": {
+              "amount": 60.5,
+              "tier": "gold"
+            },
+            "output": 2.0,
+            "got": 2.0,
+            "ok": true
+          },
+          {
+            "id": "controlled_50_heldout_gold_09",
+            "input": {
+              "amount": 99.99,
+              "tier": "gold"
+            },
+            "output": 2.0,
+            "got": 2.0,
+            "ok": true
+          },
+          {
+            "id": "controlled_50_heldout_gold_10",
+            "input": {
+              "amount": 150.0,
+              "tier": "gold"
+            },
+            "output": 2.25,
+            "got": 2.25,
+            "ok": true
+          },
+          {
+            "id": "controlled_50_heldout_gold_11",
+            "input": {
+              "amount": 777.77,
+              "tier": "gold"
+            },
+            "output": 11.67,
+            "got": 11.67,
+            "ok": true
+          }
+        ]
+      }
+    },
+    "controlled_60": {
+      "cutoffInSyntheticOracle": 60.0,
+      "unchangedPipelineGateOk": false,
+      "pipelineErrors": [
+        "claims[0].confidence 0.5 below --min-confidence 0.8",
+        "claims[1].confidence 0.5 below --min-confidence 0.8"
+      ],
+      "pipelineClaims": [
+        {
+          "id": "tier-rates",
+          "statement": "Per-tier fee = max(floor, amount * rate); gold: rate=0.015, floor=3.0, silver: rate=0.022, floor=4.5, standard: rate=0.029, floor=6.0",
+          "confidence": 0.5,
+          "authority": "inferred",
+          "limitations": [
+            "Fitted from traces only; tier set limited to observed labels"
+          ],
+          "covers_eval": [
+            "controlled_60_standard_02",
+            "controlled_60_standard_03",
+            "controlled_60_standard_04",
+            "controlled_60_standard_05",
+            "controlled_60_standard_06",
+            "controlled_60_standard_07",
+            "controlled_60_silver_02",
+            "controlled_60_silver_03",
+            "controlled_60_silver_04",
+            "controlled_60_silver_05",
+            "controlled_60_silver_06",
+            "controlled_60_silver_07",
+            "controlled_60_gold_02",
+            "controlled_60_gold_03",
+            "controlled_60_gold_04",
+            "controlled_60_gold_05",
+            "controlled_60_gold_06",
+            "controlled_60_gold_07"
+          ]
+        },
+        {
+          "id": "under-50-surcharge",
+          "statement": "When amount < 50, add flat surcharge 0.0",
+          "confidence": 0.5,
+          "authority": "inferred",
+          "limitations": [
+            "Threshold 50 inferred from residual pattern on small amounts"
+          ],
+          "covers_eval": [
+            "controlled_60_standard_00",
+            "controlled_60_standard_01",
+            "controlled_60_silver_00",
+            "controlled_60_silver_01",
+            "controlled_60_gold_00",
+            "controlled_60_gold_01"
+          ]
+        }
+      ],
+      "emittedSourceSha256": "daae3af2c2de249544a1f5c2e9f16f8366bbd6ead1ecfb106f3fd46400e1364c",
+      "training": {
+        "passed": 21,
+        "total": 24,
+        "rows": [
+          {
+            "id": "controlled_60_standard_00",
+            "input": {
+              "amount": 10.0,
+              "tier": "standard"
+            },
+            "output": 6.0,
+            "got": 6.0,
+            "ok": true
+          },
+          {
+            "id": "controlled_60_standard_01",
+            "input": {
+              "amount": 49.99,
+              "tier": "standard"
+            },
+            "output": 6.0,
+            "got": 6.0,
+            "ok": true
+          },
+          {
+            "id": "controlled_60_standard_02",
+            "input": {
+              "amount": 50.0,
+              "tier": "standard"
+            },
+            "output": 6.0,
+            "got": 6.0,
+            "ok": true
+          },
+          {
+            "id": "controlled_60_standard_03",
+            "input": {
+              "amount": 55.0,
+              "tier": "standard"
+            },
+            "output": 6.0,
+            "got": 6.0,
+            "ok": true
+          },
+          {
+            "id": "controlled_60_standard_04",
+            "input": {
+              "amount": 59.99,
+              "tier": "standard"
+            },
+            "output": 6.0,
+            "got": 6.0,
+            "ok": true
+          },
+          {
+            "id": "controlled_60_standard_05",
+            "input": {
+              "amount": 60.0,
+              "tier": "standard"
+            },
+            "output": 5.0,
+            "got": 6.0,
+            "ok": false
+          },
+          {
+            "id": "controlled_60_standard_06",
+            "input": {
+              "amount": 1000.0,
+              "tier": "standard"
+            },
+            "output": 29.0,
+            "got": 29.0,
+            "ok": true
+          },
+          {
+            "id": "controlled_60_standard_07",
+            "input": {
+              "amount": 2500.0,
+              "tier": "standard"
+            },
+            "output": 72.5,
+            "got": 72.5,
+            "ok": true
+          },
+          {
+            "id": "controlled_60_silver_00",
+            "input": {
+              "amount": 10.0,
+              "tier": "silver"
+            },
+            "output": 4.5,
+            "got": 4.5,
+            "ok": true
+          },
+          {
+            "id": "controlled_60_silver_01",
+            "input": {
+              "amount": 49.99,
+              "tier": "silver"
+            },
+            "output": 4.5,
+            "got": 4.5,
+            "ok": true
+          },
+          {
+            "id": "controlled_60_silver_02",
+            "input": {
+              "amount": 50.0,
+              "tier": "silver"
+            },
+            "output": 4.5,
+            "got": 4.5,
+            "ok": true
+          },
+          {
+            "id": "controlled_60_silver_03",
+            "input": {
+              "amount": 55.0,
+              "tier": "silver"
+            },
+            "output": 4.5,
+            "got": 4.5,
+            "ok": true
+          },
+          {
+            "id": "controlled_60_silver_04",
+            "input": {
+              "amount": 59.99,
+              "tier": "silver"
+            },
+            "output": 4.5,
+            "got": 4.5,
+            "ok": true
+          },
+          {
+            "id": "controlled_60_silver_05",
+            "input": {
+              "amount": 60.0,
+              "tier": "silver"
+            },
+            "output": 3.5,
+            "got": 4.5,
+            "ok": false
+          },
+          {
+            "id": "controlled_60_silver_06",
+            "input": {
+              "amount": 1000.0,
+              "tier": "silver"
+            },
+            "output": 22.0,
+            "got": 22.0,
+            "ok": true
+          },
+          {
+            "id": "controlled_60_silver_07",
+            "input": {
+              "amount": 2500.0,
+              "tier": "silver"
+            },
+            "output": 55.0,
+            "got": 55.0,
+            "ok": true
+          },
+          {
+            "id": "controlled_60_gold_00",
+            "input": {
+              "amount": 10.0,
+              "tier": "gold"
+            },
+            "output": 3.0,
+            "got": 3.0,
+            "ok": true
+          },
+          {
+            "id": "controlled_60_gold_01",
+            "input": {
+              "amount": 49.99,
+              "tier": "gold"
+            },
+            "output": 3.0,
+            "got": 3.0,
+            "ok": true
+          },
+          {
+            "id": "controlled_60_gold_02",
+            "input": {
+              "amount": 50.0,
+              "tier": "gold"
+            },
+            "output": 3.0,
+            "got": 3.0,
+            "ok": true
+          },
+          {
+            "id": "controlled_60_gold_03",
+            "input": {
+              "amount": 55.0,
+              "tier": "gold"
+            },
+            "output": 3.0,
+            "got": 3.0,
+            "ok": true
+          },
+          {
+            "id": "controlled_60_gold_04",
+            "input": {
+              "amount": 59.99,
+              "tier": "gold"
+            },
+            "output": 3.0,
+            "got": 3.0,
+            "ok": true
+          },
+          {
+            "id": "controlled_60_gold_05",
+            "input": {
+              "amount": 60.0,
+              "tier": "gold"
+            },
+            "output": 2.0,
+            "got": 3.0,
+            "ok": false
+          },
+          {
+            "id": "controlled_60_gold_06",
+            "input": {
+              "amount": 1000.0,
+              "tier": "gold"
+            },
+            "output": 15.0,
+            "got": 15.0,
+            "ok": true
+          },
+          {
+            "id": "controlled_60_gold_07",
+            "input": {
+              "amount": 2500.0,
+              "tier": "gold"
+            },
+            "output": 37.5,
+            "got": 37.5,
+            "ok": true
+          }
+        ]
+      },
+      "heldOut": {
+        "passed": 24,
+        "total": 36,
+        "rows": [
+          {
+            "id": "controlled_60_heldout_standard_00",
+            "input": {
+              "amount": 5.0,
+              "tier": "standard"
+            },
+            "output": 6.0,
+            "got": 6.0,
+            "ok": true
+          },
+          {
+            "id": "controlled_60_heldout_standard_01",
+            "input": {
+              "amount": 12.34,
+              "tier": "standard"
+            },
+            "output": 6.0,
+            "got": 6.0,
+            "ok": true
+          },
+          {
+            "id": "controlled_60_heldout_standard_02",
+            "input": {
+              "amount": 49.0,
+              "tier": "standard"
+            },
+            "output": 6.0,
+            "got": 6.0,
+            "ok": true
+          },
+          {
+            "id": "controlled_60_heldout_standard_03",
+            "input": {
+              "amount": 49.98,
+              "tier": "standard"
+            },
+            "output": 6.0,
+            "got": 6.0,
+            "ok": true
+          },
+          {
+            "id": "controlled_60_heldout_standard_04",
+            "input": {
+              "amount": 50.01,
+              "tier": "standard"
+            },
+            "output": 6.0,
+            "got": 6.0,
+            "ok": true
+          },
+          {
+            "id": "controlled_60_heldout_standard_05",
+            "input": {
+              "amount": 54.99,
+              "tier": "standard"
+            },
+            "output": 6.0,
+            "got": 6.0,
+            "ok": true
+          },
+          {
+            "id": "controlled_60_heldout_standard_06",
+            "input": {
+              "amount": 59.98,
+              "tier": "standard"
+            },
+            "output": 6.0,
+            "got": 6.0,
+            "ok": true
+          },
+          {
+            "id": "controlled_60_heldout_standard_07",
+            "input": {
+              "amount": 60.02,
+              "tier": "standard"
+            },
+            "output": 5.0,
+            "got": 6.0,
+            "ok": false
+          },
+          {
+            "id": "controlled_60_heldout_standard_08",
+            "input": {
+              "amount": 60.5,
+              "tier": "standard"
+            },
+            "output": 5.0,
+            "got": 6.0,
+            "ok": false
+          },
+          {
+            "id": "controlled_60_heldout_standard_09",
+            "input": {
+              "amount": 99.99,
+              "tier": "standard"
+            },
+            "output": 5.0,
+            "got": 6.0,
+            "ok": false
+          },
+          {
+            "id": "controlled_60_heldout_standard_10",
+            "input": {
+              "amount": 150.0,
+              "tier": "standard"
+            },
+            "output": 5.0,
+            "got": 6.0,
+            "ok": false
+          },
+          {
+            "id": "controlled_60_heldout_standard_11",
+            "input": {
+              "amount": 777.77,
+              "tier": "standard"
+            },
+            "output": 22.56,
+            "got": 22.56,
+            "ok": true
+          },
+          {
+            "id": "controlled_60_heldout_silver_00",
+            "input": {
+              "amount": 5.0,
+              "tier": "silver"
+            },
+            "output": 4.5,
+            "got": 4.5,
+            "ok": true
+          },
+          {
+            "id": "controlled_60_heldout_silver_01",
+            "input": {
+              "amount": 12.34,
+              "tier": "silver"
+            },
+            "output": 4.5,
+            "got": 4.5,
+            "ok": true
+          },
+          {
+            "id": "controlled_60_heldout_silver_02",
+            "input": {
+              "amount": 49.0,
+              "tier": "silver"
+            },
+            "output": 4.5,
+            "got": 4.5,
+            "ok": true
+          },
+          {
+            "id": "controlled_60_heldout_silver_03",
+            "input": {
+              "amount": 49.98,
+              "tier": "silver"
+            },
+            "output": 4.5,
+            "got": 4.5,
+            "ok": true
+          },
+          {
+            "id": "controlled_60_heldout_silver_04",
+            "input": {
+              "amount": 50.01,
+              "tier": "silver"
+            },
+            "output": 4.5,
+            "got": 4.5,
+            "ok": true
+          },
+          {
+            "id": "controlled_60_heldout_silver_05",
+            "input": {
+              "amount": 54.99,
+              "tier": "silver"
+            },
+            "output": 4.5,
+            "got": 4.5,
+            "ok": true
+          },
+          {
+            "id": "controlled_60_heldout_silver_06",
+            "input": {
+              "amount": 59.98,
+              "tier": "silver"
+            },
+            "output": 4.5,
+            "got": 4.5,
+            "ok": true
+          },
+          {
+            "id": "controlled_60_heldout_silver_07",
+            "input": {
+              "amount": 60.02,
+              "tier": "silver"
+            },
+            "output": 3.5,
+            "got": 4.5,
+            "ok": false
+          },
+          {
+            "id": "controlled_60_heldout_silver_08",
+            "input": {
+              "amount": 60.5,
+              "tier": "silver"
+            },
+            "output": 3.5,
+            "got": 4.5,
+            "ok": false
+          },
+          {
+            "id": "controlled_60_heldout_silver_09",
+            "input": {
+              "amount": 99.99,
+              "tier": "silver"
+            },
+            "output": 3.5,
+            "got": 4.5,
+            "ok": false
+          },
+          {
+            "id": "controlled_60_heldout_silver_10",
+            "input": {
+              "amount": 150.0,
+              "tier": "silver"
+            },
+            "output": 3.5,
+            "got": 4.5,
+            "ok": false
+          },
+          {
+            "id": "controlled_60_heldout_silver_11",
+            "input": {
+              "amount": 777.77,
+              "tier": "silver"
+            },
+            "output": 17.11,
+            "got": 17.11,
+            "ok": true
+          },
+          {
+            "id": "controlled_60_heldout_gold_00",
+            "input": {
+              "amount": 5.0,
+              "tier": "gold"
+            },
+            "output": 3.0,
+            "got": 3.0,
+            "ok": true
+          },
+          {
+            "id": "controlled_60_heldout_gold_01",
+            "input": {
+              "amount": 12.34,
+              "tier": "gold"
+            },
+            "output": 3.0,
+            "got": 3.0,
+            "ok": true
+          },
+          {
+            "id": "controlled_60_heldout_gold_02",
+            "input": {
+              "amount": 49.0,
+              "tier": "gold"
+            },
+            "output": 3.0,
+            "got": 3.0,
+            "ok": true
+          },
+          {
+            "id": "controlled_60_heldout_gold_03",
+            "input": {
+              "amount": 49.98,
+              "tier": "gold"
+            },
+            "output": 3.0,
+            "got": 3.0,
+            "ok": true
+          },
+          {
+            "id": "controlled_60_heldout_gold_04",
+            "input": {
+              "amount": 50.01,
+              "tier": "gold"
+            },
+            "output": 3.0,
+            "got": 3.0,
+            "ok": true
+          },
+          {
+            "id": "controlled_60_heldout_gold_05",
+            "input": {
+              "amount": 54.99,
+              "tier": "gold"
+            },
+            "output": 3.0,
+            "got": 3.0,
+            "ok": true
+          },
+          {
+            "id": "controlled_60_heldout_gold_06",
+            "input": {
+              "amount": 59.98,
+              "tier": "gold"
+            },
+            "output": 3.0,
+            "got": 3.0,
+            "ok": true
+          },
+          {
+            "id": "controlled_60_heldout_gold_07",
+            "input": {
+              "amount": 60.02,
+              "tier": "gold"
+            },
+            "output": 2.0,
+            "got": 3.0,
+            "ok": false
+          },
+          {
+            "id": "controlled_60_heldout_gold_08",
+            "input": {
+              "amount": 60.5,
+              "tier": "gold"
+            },
+            "output": 2.0,
+            "got": 3.0,
+            "ok": false
+          },
+          {
+            "id": "controlled_60_heldout_gold_09",
+            "input": {
+              "amount": 99.99,
+              "tier": "gold"
+            },
+            "output": 2.0,
+            "got": 3.0,
+            "ok": false
+          },
+          {
+            "id": "controlled_60_heldout_gold_10",
+            "input": {
+              "amount": 150.0,
+              "tier": "gold"
+            },
+            "output": 2.25,
+            "got": 3.0,
+            "ok": false
+          },
+          {
+            "id": "controlled_60_heldout_gold_11",
+            "input": {
+              "amount": 777.77,
+              "tier": "gold"
+            },
+            "output": 11.67,
+            "got": 11.67,
+            "ok": true
+          }
+        ]
+      }
+    }
+  },
+  "testedSourceUnchanged": true
+}
